@@ -1,0 +1,6 @@
+{
+  "short_name": "Chatterbox",
+  "name": "Chatterbox",
+  "start_url": ".",
+  "display": "standalone"
+}
