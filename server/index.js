@@ -10,6 +10,14 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
+// when a new user connection occurs
+io.on('connection', (socket) => {
+    //   disconnect user 
+    socket.on('disconnect', () => {
+
+    })
+})
+
 app.use(router)
 
 
