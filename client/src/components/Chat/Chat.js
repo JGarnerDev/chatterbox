@@ -6,7 +6,12 @@ let socket;
 
 const Chat = ({ location }) => {
   const [name, setName] = useState("");
+  const [users, setUsers] = useState("");
+
   const [room, setRoom] = useState("");
+
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
 
   const ENDPOINT = "localhost:5000";
 
@@ -32,7 +37,42 @@ const Chat = ({ location }) => {
     //   useEffect will only be triggered when any values in this array are changed
     [ENDPOINT, location.search]
   );
-  return <div></div>;
+
+  useEffect(() => {
+    // when a message is made in the room, it is added to the list of messages
+    socket.on("message", (message) => {
+      setMessages([...messages, message]);
+    });
+    socket.on("roomData", ({ users }) => {
+      setUsers(users);
+    });
+  }, [messages]);
+
+  const sendMessage = (event) => {
+    event.preventDefault();
+
+    if (message) {
+      socket.emit("sendMessage", message, () => setMessage(""));
+    }
+  };
+  console.log(messages);
+
+  return (
+    <div>
+      <div>
+        <input
+          type="text"
+          value={message}
+          onChange={(event) => {
+            setMessage(event.target.value);
+          }}
+          onKeyPress={(event) =>
+            event.key === "Enter" ? sendMessage(event) : null
+          }
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Chat;

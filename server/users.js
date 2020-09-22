@@ -39,12 +39,7 @@ const removeUser = (id) => {
   }
 };
 
-const getUser = (id) => {
-  //  we need a function that returns a user based on id match
-  users.find((user) => {
-    user.id === id;
-  });
-};
+const getUser = (id) => users.find((user) => user.id === id);
 
 const getUsersInRoom = (room) => {
   //  we need a function that returns a list of users based on room name match
