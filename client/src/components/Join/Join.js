@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Join = () => {
-  // hooks to handle state changes in a functional component
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
 

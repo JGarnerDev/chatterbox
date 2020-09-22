@@ -1,26 +1,25 @@
-const express = require('express')
-const socketio = require('socket.io')
-const http = require('http')
+const express = require("express");
+const socketio = require("socket.io");
+const http = require("http");
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
-const router = require('./router')
+const router = require("./router");
 
-const app = express()
-const server = http.createServer(app)
-const io = socketio(server)
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 
 // when a new user connection occurs
-io.on('connection', (socket) => {
-    //   disconnect user 
-    socket.on('disconnect', () => {
+io.on("connection", (socket) => {
+  //   recieved from Chat component, should return a string indicating that 'USERNAME has joined the ROOMNAME room'
+  socket.on("join", ({ name, room }, cb) => {});
+  //   disconnect user
+  socket.on("disconnect", () => {});
+});
 
-    })
-})
-
-app.use(router)
-
+app.use(router);
 
 server.listen(PORT, () => {
-    console.log(`Server's up on port ${PORT}`)
-})
+  console.log(`Server's up on port ${PORT}`);
+});
