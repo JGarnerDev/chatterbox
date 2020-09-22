@@ -1,9 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Join = () => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
+  const [error, setError] = useState("");
+
+  const checkForUniqueName = () => {
+    setError("");
+
+    if (!name || !room) {
+      setError("You need to pick a name and a room!");
+      return false;
+    }
+    axios
+      .post("http://localhost:5000/namecheck", { room, name })
+      .then((res) => {
+        if (res.data.message) {
+          setError(res.data.message);
+          return false;
+        }
+      });
+  };
 
   return (
     <div className="Join">
@@ -30,12 +49,13 @@ const Join = () => {
         </div>
         <Link
           // If either name or room values don't exist, then no event is to be emitted
-          onClick={(event) => (!name || !room ? event.preventDefault() : null)}
+          onClick={(event) => (!name || !room || error ? event.preventDefault() : null)}
           // the link goes to an address formed with both user name and room
           to={`/chat?name=${name}&room=${room}`}
         >
           <button type="submit">Sign in</button>
         </Link>
+        {error}
       </div>
     </div>
   );

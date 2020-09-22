@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const socketio = require("socket.io");
 const http = require("http");
 const cors = require("cors");
@@ -13,8 +14,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.use(router);
+app.use(bodyParser.json());
 app.use(cors());
+app.use(router);
 
 // when a new user connection occurs
 io.on("connection", (socket) => {
