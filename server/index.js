@@ -29,13 +29,13 @@ io.on("connection", (socket) => {
 
     // Send a message to the user that they are welcomed
     socket.emit("message", {
-      user: "ChatterBox",
+      user: "//",
       text: `Hey ${user.name}! Welcome to the ${user.room} room`,
     });
 
     // Send a message to the chat room that someone has arrived
     socket.broadcast.to(user.room).emit("message", {
-      user: "ChatterBox",
+      user: "//",
       text: `${user.name} has joined!`,
     });
 
@@ -62,9 +62,10 @@ io.on("connection", (socket) => {
   //   disconnect user
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
+
     if (user) {
       io.to(user.room).emit("message", {
-        user: "ChatterBox",
+        user: "//",
         text: `${user.name} has left`,
       });
     }

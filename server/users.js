@@ -2,19 +2,14 @@
 const users = [];
 
 const addUser = ({ id, name, room }) => {
-  // room name must be made all lower case and no spaces. Ex: 'This Room' ==> 'thisroom'
-  room = room.trim().toLowerCase();
-  // ...same for name
-  name = name.trim().toLowerCase();
-
   // we need to compare the attempted user data against the user objects already present in the array
-  const existingUser = users.find((user) => {
-    user.room === room && user.name === name;
+  let existingUser = users.find((user) => {
+    return user.room === room && user.name === name;
   });
 
   //   ...and send them a message to inform them if we found an identical match
   if (existingUser) {
-    return { error: "That user name is taken!" };
+    console.log("We have duplicate usernames");
   }
 
   //  ...else, we make a new user
@@ -30,9 +25,8 @@ const addUser = ({ id, name, room }) => {
 const removeUser = (id) => {
   // we look into the users array to find a match by id
   const index = users.findIndex((user) => {
-    user.id === id;
+    return user.id === id;
   });
-
   //   if there is a match, splice the array for one at that index and return the first and only element in the result
   if (index !== -1) {
     return users.splice(index, 1)[0];
