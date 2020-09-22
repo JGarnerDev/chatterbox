@@ -7,19 +7,17 @@ const Join = () => {
   const [room, setRoom] = useState("");
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    checkForUniqueName();
+  }, [name, room]);
+
   const checkForUniqueName = () => {
     setError("");
-
-    if (!name || !room) {
-      setError("You need to pick a name and a room!");
-      return false;
-    }
     axios
       .post("http://localhost:5000/namecheck", { room, name })
       .then((res) => {
         if (res.data.message) {
           setError(res.data.message);
-          return false;
         }
       });
   };
@@ -33,7 +31,6 @@ const Join = () => {
             placeholder="User name"
             type="text"
             onChange={(event) => {
-              // Same as this.setState({...})
               setName(event.target.value);
             }}
           />
@@ -49,7 +46,9 @@ const Join = () => {
         </div>
         <Link
           // If either name or room values don't exist, then no event is to be emitted
-          onClick={(event) => (!name || !room || error ? event.preventDefault() : null)}
+          onClick={(event) =>
+            !name || !room || error ? event.preventDefault() : null
+          }
           // the link goes to an address formed with both user name and room
           to={`/chat?name=${name}&room=${room}`}
         >
