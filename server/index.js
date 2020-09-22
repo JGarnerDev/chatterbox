@@ -40,7 +40,10 @@ io.on("connection", (socket) => {
     });
 
     // we push the user to the stream of events occuring in the room
-
+    io.to(user.room).to("roomData", {
+      room: user.room,
+      users: getUsersInRoom(user.room),
+    });
     cb();
   });
 
@@ -49,11 +52,23 @@ io.on("connection", (socket) => {
 
     // sends a message to the room the user is in that contains the message text as well as the sender's name
     io.to(user.room).emit("message", { user: user.name, text: message });
+    io.to(user.room).emit("roomData", {
+      room: user.room,
+      users: getUsersInRoom(user.room),
+    });
     cb();
   });
 
   //   disconnect user
-  socket.on("disconnect", () => {});
+  socket.on("disconnect", () => {
+    const user = removeUser(socket.id);
+    if (user) {
+      io.to(user.room).emit("message", {
+        user: "ChatterBox",
+        text: `${user.name} has left`,
+      });
+    }
+  });
 });
 
 server.listen(PORT, () => {

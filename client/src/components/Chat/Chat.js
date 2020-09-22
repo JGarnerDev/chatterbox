@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 
+import Header from "../Header/Header";
+import Messages from "../Messages/Messages";
+import Input from "../Input/Input";
+
 let socket;
 
 const Chat = ({ location }) => {
@@ -55,20 +59,17 @@ const Chat = ({ location }) => {
       socket.emit("sendMessage", message, () => setMessage(""));
     }
   };
-  console.log(messages);
 
   return (
     <div>
       <div>
-        <input
-          type="text"
-          value={message}
-          onChange={(event) => {
-            setMessage(event.target.value);
-          }}
-          onKeyPress={(event) =>
-            event.key === "Enter" ? sendMessage(event) : null
-          }
+        <Header room={room} />
+        <Messages messages={messages} name={name} />
+
+        <Input
+          message={message}
+          setMessage={setMessage}
+          sendMessage={sendMessage}
         />
       </div>
     </div>
