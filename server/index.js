@@ -53,10 +53,6 @@ io.on("connection", (socket) => {
     let user = getUser(socket.id);
     // sends a message to the room the user is in that contains the message text as well as the sender's name
     io.to(user.room).emit("message", { user: user.name, text: message });
-    io.to(user.room).emit("roomData", {
-      room: user.room,
-      users: getUsersInRoom(user.room),
-    });
   });
 
   //   disconnect user

@@ -5,6 +5,12 @@ const Message = ({ message: { user, text }, name }) => {
 
   user === name ? (fromCurrentUser = true) : (fromCurrentUser = false);
 
+
+
+  console.log("!");
+  
+  
+  
   return fromCurrentUser ? (
     <div className="Message">
       <p className="message-text currentUser">{text}</p>
