@@ -1,7 +1,7 @@
-const express = require("express");
+const app = require("express")();
 const bodyParser = require("body-parser");
-const socketio = require("socket.io");
-const http = require("http");
+const http = require("http").createServer(app);
+const io = require("socket.io")(http, { wsEngine: "ws" });
 const cors = require("cors");
 
 const {
@@ -14,10 +14,6 @@ const {
 const PORT = process.env.PORT || 5000;
 
 const router = require("./router");
-
-const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -55,7 +51,6 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", (message) => {
     let user = getUser(socket.id);
-
     // sends a message to the room the user is in that contains the message text as well as the sender's name
     io.to(user.room).emit("message", { user: user.name, text: message });
     io.to(user.room).emit("roomData", {
@@ -77,6 +72,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(PORT, () => {
+http.listen(PORT, () => {
   console.log(`Server's up on port ${PORT}`);
 });
