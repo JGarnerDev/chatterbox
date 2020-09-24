@@ -4,7 +4,7 @@ const Message = ({ message: { user, text }, name }) => {
   let fromCurrentUser = false;
 
   user === name ? (fromCurrentUser = true) : (fromCurrentUser = false);
-  console.log("Msg!");
+
   return fromCurrentUser ? (
     <div className="Message">
       <p className="message-text currentUser">{text}</p>

@@ -20,6 +20,7 @@ const Chat = ({ location }) => {
   const [messages, setMessages] = useState([]);
 
   const ENDPOINT = "localhost:5000";
+
   useEffect(
     () => {
       //   the query string is everything beyond 'chat?' in the Join component's Link 'to' property (i.e. 'name=foo&room=bar')
@@ -44,6 +45,9 @@ const Chat = ({ location }) => {
   );
 
   useEffect(() => {
+    if (messages.length > 5) {
+      messages.shift();
+    }
     // when a message is made in the room, it is added to the list of messages
     socket.on("message", (message) => {
       setMessages([...messages, message]);
