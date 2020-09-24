@@ -20,7 +20,6 @@ const Chat = ({ location }) => {
   const [messages, setMessages] = useState([]);
 
   const ENDPOINT = "localhost:5000";
-
   useEffect(
     () => {
       //   the query string is everything beyond 'chat?' in the Join component's Link 'to' property (i.e. 'name=foo&room=bar')

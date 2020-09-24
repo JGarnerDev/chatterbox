@@ -7,6 +7,7 @@ const addUser = ({ id, name, room }) => {
   //   ...add it to our array held in the global scope
   users.push(user);
   //   and return that use object when done
+
   return { user };
 };
 
@@ -21,11 +22,14 @@ const removeUser = (id) => {
   }
 };
 
-const getUser = (id) => users.find((user) => user.id === id);
+const getUser = (id) => {
+  const user = users.find((user) => user.id === id);
+  return user;
+};
 
 const getUsersInRoom = (room) => {
   //  we need a function that returns a list of users based on room name match
-  users.filter((user) => user.room === room);
+  return users.filter((user) => user.room === room);
 };
 
 module.exports = { addUser, removeUser, getUser, getUsersInRoom, users };
