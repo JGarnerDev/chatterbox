@@ -8,10 +8,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/namecheck", (req, res) => {
-  const name = req.body.name;
-  const room = req.body.room;
   let existingUser = users.find((user) => {
-    return user.room === room && user.name === name;
+    return user.room === req.body.room && user.name === req.body.name;
   });
   existingUser
     ? res.send({

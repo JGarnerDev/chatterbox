@@ -1,0 +1,8 @@
+// For both page formats (join and chat)
+
+@mixin view {
+  height: 80vh;
+  width: 90vw;
+  //
+  overflow: hidden;
+}

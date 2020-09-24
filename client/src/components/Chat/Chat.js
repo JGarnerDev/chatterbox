@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
+
 import Header from "../Header/Header";
 import Messages from "../Messages/Messages";
 import Input from "../Input/Input";
@@ -61,18 +64,17 @@ const Chat = ({ location }) => {
   };
 
   return (
-    <div>
-      <div>
+    <Container id="Chat">
+      <Paper id="chat-wrapper">
         <Header room={room} />
         <Messages messages={messages} name={name} />
-
         <Input
           message={message}
           setMessage={setMessage}
           sendMessage={sendMessage}
         />
-      </div>
-    </div>
+      </Paper>
+    </Container>
   );
 };
 
