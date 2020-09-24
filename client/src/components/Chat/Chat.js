@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
+import { Container, Paper } from "@material-ui/core";
 
 import Header from "../Header/Header";
 import Messages from "../Messages/Messages";

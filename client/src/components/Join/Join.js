@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { Container, Paper, TextField, Button } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
 const Join = () => {

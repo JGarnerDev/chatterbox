@@ -1,19 +1,27 @@
 import React from "react";
 
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+  Typography,
+} from "@material-ui/core";
+
+import { Menu, CloseRounded } from "@material-ui/icons";
+
 const Header = ({ room }) => (
-  <div>
-    <div>
-      {/* online  icon*/}
-      <img src="" alt="" />
-      <h3>{room}</h3>
-    </div>
-    <div>
-      <a href="/">
-        {/* Close icon */}
-        <img src="" alt="" />
-      </a>
-    </div>
-  </div>
+  <AppBar position="static" id="Header">
+    <Toolbar id="header-wrapper">
+      <IconButton edge="start" aria-label="menu">
+        <Menu />
+      </IconButton>
+      <Typography variant="h6">{room}</Typography>
+      <Button color="inherit" href="/">
+        <CloseRounded />
+      </Button>
+    </Toolbar>
+  </AppBar>
 );
 
 export default Header;

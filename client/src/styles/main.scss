@@ -124,6 +124,16 @@ body {
     // color
     background: white;
   }
+  #Header {
+    // Content alignment
+
+    //   Color
+    background: $C4;
+    #header-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }
 
 // media queries
