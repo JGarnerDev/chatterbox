@@ -17,9 +17,9 @@ const Header = ({ room }) => (
         <Menu />
       </IconButton>
       <Typography variant="h6">{room}</Typography>
-      <Button color="inherit" href="/">
+      <IconButton edge="end" href="/">
         <CloseRounded />
-      </Button>
+      </IconButton>
     </Toolbar>
   </AppBar>
 );

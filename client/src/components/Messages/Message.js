@@ -6,14 +6,14 @@ const Message = ({ message: { user, text }, name }) => {
   user === name ? (fromCurrentUser = true) : (fromCurrentUser = false);
 
   return fromCurrentUser ? (
-    <div>
-      <h3>{user}</h3>
-      <p>{text}</p>
+    <div className="Message">
+      <p className="message-text currentUser">{text}</p>
+      <h3 className="message-userbadge currentUser">{user}</h3>
     </div>
   ) : (
-    <div>
-      <p>{text}</p>
-      <h3>{user}</h3>
+    <div className="Message">
+      <h3 className="message-userbadge">{user}</h3>
+      <p className="message-text">{text}</p>
     </div>
   );
 };

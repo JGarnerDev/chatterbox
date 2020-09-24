@@ -21,7 +21,7 @@ app.use(router);
 // when a new user connection occurs
 io.on("connection", (socket) => {
   //   recieved from Chat component, should return a string indicating that 'USERNAME has joined the ROOMNAME room'
-  socket.on("join", ({ name, room }, cb) => {
+  socket.on("join", ({ name, room }) => {
     // feeds the new user data to users.js to confirm unique and add, or to return !unique error
     // socket ids are unique in this app's scope, so they are retained for user.id
     const { err, user } = addUser({ id: socket.id, name, room });
@@ -46,10 +46,9 @@ io.on("connection", (socket) => {
       room: user.room,
       users: getUsersInRoom(user.room),
     });
-    cb();
   });
 
-  socket.on("sendMessage", (message, cb) => {
+  socket.on("sendMessage", (message) => {
     let user = getUser(socket.id);
 
     // sends a message to the room the user is in that contains the message text as well as the sender's name
@@ -58,7 +57,6 @@ io.on("connection", (socket) => {
       room: user.room,
       users: getUsersInRoom(user.room),
     });
-    cb();
   });
 
   //   disconnect user

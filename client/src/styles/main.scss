@@ -117,13 +117,6 @@ body {
   @include view;
   // Size
 
-  #chat-wrapper {
-    // Size
-    width: 100%;
-    height: 100%;
-    // color
-    background: white;
-  }
   #Header {
     // Content alignment
 
@@ -132,6 +125,50 @@ body {
     #header-wrapper {
       display: flex;
       justify-content: space-between;
+    }
+  }
+  #chat-wrapper {
+    // Content alignment
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    // Size
+    width: 100%;
+    height: 100%;
+    // color
+    background: white;
+    #Messages {
+      flex-grow: 1;
+      scroll-behavior: smooth;
+      overflow-y: scroll;
+      .Message {
+        // Content alignment
+        display: flex;
+        // Size
+        margin: 10px;
+
+        // Color
+
+        .message-text {
+          flex-grow: 5;
+          padding: 10px;
+          margin: 5px;
+          background: $C4-light;
+          border-radius: 10px;
+          word-wrap: break-word;
+        }
+        .message-text.currentUser {
+          background: $C4;
+        }
+        .message-userbadge {
+          flex-grow: 1;
+          padding: 10px;
+          text-align: right;
+        }
+        .message-userbadge.currentUser {
+          text-align: left;
+        }
+      }
     }
   }
 }

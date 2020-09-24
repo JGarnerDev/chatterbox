@@ -2,22 +2,10 @@
 const users = [];
 
 const addUser = ({ id, name, room }) => {
-  // we need to compare the attempted user data against the user objects already present in the array
-  let existingUser = users.find((user) => {
-    return user.room === room && user.name === name;
-  });
-
-  //   ...and send them a message to inform them if we found an identical match
-  if (existingUser) {
-    console.log("We have duplicate usernames");
-  }
-
-  //  ...else, we make a new user
+  //   we make a new user
   const user = { id, name, room };
-
   //   ...add it to our array held in the global scope
   users.push(user);
-
   //   and return that use object when done
   return { user };
 };
